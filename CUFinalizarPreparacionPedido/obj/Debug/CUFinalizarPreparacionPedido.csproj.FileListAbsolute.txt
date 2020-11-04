@@ -1,0 +1,13 @@
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\bin\Debug\CUFinalizarPreparacionPedido.exe.config
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\bin\Debug\CUFinalizarPreparacionPedido.exe
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\bin\Debug\CUFinalizarPreparacionPedido.pdb
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.csprojAssemblyReference.cache
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.Properties.Resources.resources
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.csproj.GenerateResource.cache
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.exe
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.pdb
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\Dsi.Interfaz.FormConfirmacion.resources
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\Dsi.Interfaz.FormConfirmarCancelacion.resources
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\Dsi.Interfaz.FormError.resources
+C:\Users\HP\source\repos\CUFinalizarPreparacionPedido\CUFinalizarPreparacionPedido\obj\Debug\interfaz.PantallaFinalizarPreparacionPedido.resources

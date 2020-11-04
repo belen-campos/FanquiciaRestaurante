@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{89D81293-902E-4AFA-8843-BDF794FAADAA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CUFinalizarPreparacionPedido</RootNamespace>
+    <AssemblyName>CUFinalizarPreparacionPedido</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="interfaz\FormConfirmacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interfaz\FormConfirmacion.Designer.cs">
+      <DependentUpon>FormConfirmacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="interfaz\FormConfirmarCancelacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interfaz\FormConfirmarCancelacion.Designer.cs">
+      <DependentUpon>FormConfirmarCancelacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="interfaz\FormError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interfaz\FormError.Designer.cs">
+      <DependentUpon>FormError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="interfaz\PantallaFinalizarPreparacionPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interfaz\PantallaFinalizarPreparacionPedido.Designer.cs">
+      <DependentUpon>PantallaFinalizarPreparacionPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="negocio\DetalleDePedido.cs" />
+    <Compile Include="negocio\Estado.cs" />
+    <Compile Include="negocio\GestorFinalizarPreparacionPedido.cs" />
+    <Compile Include="negocio\HistorialEstado.cs" />
+    <Compile Include="negocio\Mesa.cs" />
+    <Compile Include="negocio\Pedido.cs" />
+    <Compile Include="negocio\Producto.cs" />
+    <Compile Include="negocio\ProductoDeCarta.cs" />
+    <Compile Include="negocio\Menu.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="soporte\IGestorPersistencia.cs" />
+    <Compile Include="soporte\IPersistencia.cs" />
+    <Compile Include="soporte\PersistenciaBDDetallesDePedido.cs" />
+    <Compile Include="soporte\PersistenciaBDEstado.cs" />
+    <EmbeddedResource Include="interfaz\FormConfirmacion.resx">
+      <DependentUpon>FormConfirmacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="interfaz\FormConfirmarCancelacion.resx">
+      <DependentUpon>FormConfirmarCancelacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="interfaz\FormError.resx">
+      <DependentUpon>FormError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="interfaz\PantallaFinalizarPreparacionPedido.resx">
+      <DependentUpon>PantallaFinalizarPreparacionPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
