@@ -1,9 +1,5 @@
 ﻿using CUFinalizarPreparacionPedido.soporte;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CUFinalizarPreparacionPedido.negocio
 {
@@ -46,14 +42,19 @@ namespace CUFinalizarPreparacionPedido.negocio
                 if (dp.estaEnPreparacion(estadoEnPreparacion)) detallesEnPreparacion.Add(dp);
             }
 
-            //ordenarSegunMayorTiempoEspera(detallesEnPreparacion);
-            return null;
+            return ordenarSegunMayorTiempoEspera(detallesEnPreparacion);
         }
 
-        /*private List<DetalleDePedido> ordenarSegunMayorTiempoEspera(List<DetalleDePedido> detallesEnPreparacion)
+        private List<DetalleDePedido> ordenarSegunMayorTiempoEspera(List<DetalleDePedido> detallesEnPreparacion)
         {
-            // ver
-            return (List<DetalleDePedido>)detallesEnPreparacion.OrderBy(d=>d.getHora());
-        }*/
+            detallesEnPreparacion.Sort(delegate (DetalleDePedido x, DetalleDePedido y)
+                                             {
+                                                if (x.getHora() == null && y.getHora() == null) return 0;
+                                                else if (x.getHora() == null) return -1;
+                                                else if (y.getHora() == null) return 1;
+                                                else return x.CompareTo(y);
+                                             });
+            return detallesEnPreparacion;
+        }
     }
 }

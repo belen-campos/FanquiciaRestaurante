@@ -34,7 +34,7 @@ namespace CUFinalizarPreparacionPedido.negocio
 
         public bool esEnPreparacion()
         {
-            return this.nombre == "EnPreparacion";
+            return this.nombre == "En preparacion";
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CUFinalizarPreparacionPedido.negocio
 {
-    public class DetalleDePedido: IPersistencia
+    public class DetalleDePedido: IPersistencia, IComparable<DetalleDePedido>
     {
         private static int nroPedido;
         private static int nroDetalle;
@@ -66,5 +66,21 @@ namespace CUFinalizarPreparacionPedido.negocio
         }
 
         public TimeSpan getHora() { return this.hora; }
+
+        public int CompareTo(DetalleDePedido dp)
+        {
+            if (dp.getHora() > hora)
+            {
+                return -1;
+            }
+            else if (dp.getHora() == hora)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+        }
     }
 }
