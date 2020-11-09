@@ -1,6 +1,7 @@
 ﻿using CUFinalizarPreparacionPedido.soporte;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,10 +30,16 @@ namespace CUFinalizarPreparacionPedido.negocio
 
         public int getNroPedido() { return this.nroPedido; }
 
-        public int mostrarMesa() 
+        public string mostrarMesa() 
         {
-            Mesa mesa = Persistencia.buscarMesa(this.nroPedido);
-            return mesa.mostrarNumero();
+            string mostrarMesas = null;
+            List<Mesa> mesas = Persistencia.buscarMesa(this.nroPedido);
+            foreach (Mesa item in mesas) 
+            {
+                if (mostrarMesas == null) mostrarMesas += item.mostrarNumero();
+                else mostrarMesas +=  " - " + item.mostrarNumero();
+            }
+            return mostrarMesas;
         }
     }
 }

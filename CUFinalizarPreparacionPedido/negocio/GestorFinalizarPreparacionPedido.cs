@@ -11,13 +11,14 @@ namespace CUFinalizarPreparacionPedido.negocio
         private PantallaFinalizarPreparacionPedido pantalla;
         private List<DetalleDePedido> detallesEnPreparacion;
         private DetalleDePedido[] detallesPedidosNotificados;
-        private DetalleDePedido[] detallesPedidoSeleccionadosAServir;
+        private List<DetalleDePedido> detallesPedidoSeleccionadosAServir;
         private IGestorPersistencia persistencia;
 
         public GestorFinalizarPreparacionPedido(PantallaFinalizarPreparacionPedido pantalla)
         {
             this.pantalla = pantalla;
             detallesEnPreparacion = new List<DetalleDePedido>();
+            detallesPedidoSeleccionadosAServir = new List<DetalleDePedido>();
         }
 
         public void finalizarPedido()
@@ -27,7 +28,8 @@ namespace CUFinalizarPreparacionPedido.negocio
             pantalla.solicitarSeleccionDeUnoVariosDetalles();
         }
 
-        private String[] buscarDetallesPedidoEnPreparacion()
+        #region finalizarPedido
+        private string[] buscarDetallesPedidoEnPreparacion()
         {
             persistencia = new PersistenciaBDEstado();
 
@@ -66,7 +68,7 @@ namespace CUFinalizarPreparacionPedido.negocio
                 //dp.getHora();
                 string nombreProductoMenu = buscarInfoDetallePedido(dp);
                 int cantidad = dp.getCantidad();
-                int mesa = buscarMesaDeDetalleEnPreparacion(dp);
+                string mesa = buscarMesaDeDetalleEnPreparacion(dp);
 
                 string detalle = nombreProductoMenu+'|'+cantidad+'|'+mesa;
 
@@ -77,7 +79,7 @@ namespace CUFinalizarPreparacionPedido.negocio
             return detallesAMostrar;
         }
 
-        private int buscarMesaDeDetalleEnPreparacion(DetalleDePedido dp)
+        private string buscarMesaDeDetalleEnPreparacion(DetalleDePedido dp)
         {
             return dp.mostrarMesa();
         }
@@ -97,6 +99,13 @@ namespace CUFinalizarPreparacionPedido.negocio
                                                 else if (y.getHora() == null) return 1;
                                                 else return x.CompareTo(y);
                                              });
+        }
+        #endregion
+
+        public void detallePedidoSeleccionado(int indice) 
+        {
+            DetalleDePedido detalle = detallesEnPreparacion[indice];
+            detallesPedidoSeleccionadosAServir.Add(detalle);
         }
     }
 }

@@ -87,7 +87,7 @@ namespace CUFinalizarPreparacionPedido.negocio
             return this.menu.getNombre();
         }
 
-        public int mostrarMesa() 
+        public string mostrarMesa() 
         {
             Pedido pedido = Persistencia.buscarPedido(this.nroPedido);
             return pedido.mostrarMesa();

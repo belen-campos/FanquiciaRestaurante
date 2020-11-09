@@ -92,14 +92,22 @@ namespace CUFinalizarPreparacionPedido.soporte
             return null;
         }
 
-        public Mesa buscarMesa(int idPedido)
+        public List<Mesa> buscarMesa(int idPedido)
         {
+            List<Mesa> mesas = new List<Mesa>();
+
             SqlConnection cn = new SqlConnection("Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;");
 
             //primero debo buscar el numero de la mesa que voy a solicitar materializar
-            string query = @"SELECT P.[numeroMesa]
+            string query = @"SELECT (CASE
+		                                WHEN Mesa.[numero] IS NOT NULL THEN Mesa.numero
+		                                WHEN Un.[IdUnionMesa] IS NOT NULL THEN UnMesa.IdMesa
+	                                END) AS Mesas
                             FROM[FranquiciaRestaurante].[dbo].[Pedido] P
-                            WHERE P.[nroPedido] =" + idPedido;
+                            LEFT JOIN [FranquiciaRestaurante].[dbo].[Mesa] Mesa ON P.numeroMesa = Mesa.numero
+                            LEFT JOIN [FranquiciaRestaurante].[dbo].[UnionMesa] Un ON P.unionMesa = Un.IdUnionMesa
+                            LEFT JOIN [FranquiciaRestaurante].[dbo].[UnionMesa_Mesa] UnMesa ON Un.IdUnionMesa = UnMesa.IdUnionMesa
+                            WHERE P.nroPedido = " + idPedido;
             SqlCommand sqlCommand = new SqlCommand(query, cn);
 
             int nroMesa=-1;
@@ -114,10 +122,12 @@ namespace CUFinalizarPreparacionPedido.soporte
                     IDataRecord row = (IDataRecord)sqlDataReader;
 
                     nroMesa = (int)row[0];
+
+                    mesas.Add((Mesa)persitenciaMesa.MaterializarPorId(nroMesa));
                 }
             }
 
-            return (Mesa)persitenciaMesa.MaterializarPorId(nroMesa);
+            return mesas;
         }
 
         public Pedido nuevoPedido(int cantComensales, DateTime fechaHora, int nroPedido) 
