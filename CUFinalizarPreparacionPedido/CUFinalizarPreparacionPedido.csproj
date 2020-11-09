@@ -87,6 +87,8 @@
     <Compile Include="soporte\IPersistencia.cs" />
     <Compile Include="soporte\PersistenciaBDDetallesDePedido.cs" />
     <Compile Include="soporte\PersistenciaBDEstado.cs" />
+    <Compile Include="soporte\PersistenciaBDMesa.cs" />
+    <Compile Include="soporte\PersistenciaBDPedido.cs" />
     <EmbeddedResource Include="interfaz\FormConfirmacion.resx">
       <DependentUpon>FormConfirmacion.cs</DependentUpon>
     </EmbeddedResource>

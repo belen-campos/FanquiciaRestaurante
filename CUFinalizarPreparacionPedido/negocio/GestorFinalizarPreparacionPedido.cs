@@ -1,25 +1,38 @@
 ﻿using CUFinalizarPreparacionPedido.soporte;
+using interfaz;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CUFinalizarPreparacionPedido.negocio
 {
     public class GestorFinalizarPreparacionPedido
     {
+        private PantallaFinalizarPreparacionPedido pantalla;
+        private List<DetalleDePedido> detallesEnPreparacion;
         private DetalleDePedido[] detallesPedidosNotificados;
         private DetalleDePedido[] detallesPedidoSeleccionadosAServir;
         private IGestorPersistencia persistencia;
 
-        public List<DetalleDePedido> finalizarPedido()
+        public GestorFinalizarPreparacionPedido(PantallaFinalizarPreparacionPedido pantalla)
         {
-            return buscarDetallesPedidoEnPreparacion();
+            this.pantalla = pantalla;
+            detallesEnPreparacion = new List<DetalleDePedido>();
         }
 
-        private List<DetalleDePedido> buscarDetallesPedidoEnPreparacion()
+        public void finalizarPedido()
+        {
+            string[] detalles = buscarDetallesPedidoEnPreparacion();
+            pantalla.mostrarDatosDetallePedidoEnPreparacion(detalles);
+            pantalla.solicitarSeleccionDeUnoVariosDetalles();
+        }
+
+        private String[] buscarDetallesPedidoEnPreparacion()
         {
             persistencia = new PersistenciaBDEstado();
 
             List<Estado> estadosTodos = persistencia.buscarTodosEstados();
-            Estado estadoEnPreparacion = new Estado();
+            Estado estadoEnPreparacion = null;
 
             foreach(Estado estado in estadosTodos)
             {
@@ -35,26 +48,55 @@ namespace CUFinalizarPreparacionPedido.negocio
             persistencia = new PersistenciaBDDetallesDePedido();
             List<DetalleDePedido> detallesTodos = persistencia.buscarTodosDetallesPedido(estadosTodos);
 
-            List<DetalleDePedido> detallesEnPreparacion = new List<DetalleDePedido>();
-
             foreach(DetalleDePedido dp in detallesTodos)
             {
-                if (dp.estaEnPreparacion(estadoEnPreparacion)) detallesEnPreparacion.Add(dp);
+                if (dp.estaEnPreparacion(estadoEnPreparacion)) this.detallesEnPreparacion.Add(dp);
             }
 
-            return ordenarSegunMayorTiempoEspera(detallesEnPreparacion);
+            ordenarSegunMayorTiempoEspera();
+
+            int cntDetalles = detallesEnPreparacion.Count();
+
+            string[] detallesAMostrar = new string[cntDetalles];
+
+            int i = 0;
+
+            foreach (DetalleDePedido dp in detallesEnPreparacion) 
+            {
+                //dp.getHora();
+                string nombreProductoMenu = buscarInfoDetallePedido(dp);
+                int cantidad = dp.getCantidad();
+                int mesa = buscarMesaDeDetalleEnPreparacion(dp);
+
+                string detalle = nombreProductoMenu+'|'+cantidad+'|'+mesa;
+
+                detallesAMostrar[i] = detalle;
+                i++;
+            }
+
+            return detallesAMostrar;
         }
 
-        private List<DetalleDePedido> ordenarSegunMayorTiempoEspera(List<DetalleDePedido> detallesEnPreparacion)
+        private int buscarMesaDeDetalleEnPreparacion(DetalleDePedido dp)
         {
-            detallesEnPreparacion.Sort(delegate (DetalleDePedido x, DetalleDePedido y)
+            return dp.mostrarMesa();
+        }
+
+        private string buscarInfoDetallePedido(DetalleDePedido dp)
+        { 
+            if (dp.contieneMenu()) return "-|"+dp.mostrarNombreMenu();
+            else return dp.mostrarNombreProducto()+ "|-";
+        }
+
+        private void ordenarSegunMayorTiempoEspera()
+        {
+            this.detallesEnPreparacion.Sort(delegate (DetalleDePedido x, DetalleDePedido y)
                                              {
                                                 if (x.getHora() == null && y.getHora() == null) return 0;
                                                 else if (x.getHora() == null) return -1;
                                                 else if (y.getHora() == null) return 1;
                                                 else return x.CompareTo(y);
                                              });
-            return detallesEnPreparacion;
         }
     }
 }

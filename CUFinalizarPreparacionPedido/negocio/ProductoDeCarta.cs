@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace CUFinalizarPreparacionPedido.negocio
 {
-    class ProductoDeCarta
+    public class ProductoDeCarta
     {
+        private bool esFavorito { get; set; }
+        private decimal precio { get; set; }
+        private Producto producto { get; set; }
+
+        public ProductoDeCarta(bool favorito, decimal precio, Producto producto) 
+        {
+            this.esFavorito = favorito;
+            this.precio = precio;
+            this.producto = producto;
+        }
+
+        public string mostrarProducto() 
+        {
+            return producto.getNombre();
+        }
     }
 }

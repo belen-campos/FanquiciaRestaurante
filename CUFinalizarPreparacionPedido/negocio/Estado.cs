@@ -8,17 +8,11 @@ namespace CUFinalizarPreparacionPedido.negocio
 {
     public class Estado
     {
-        private int idEstado { get; set; }
-
         private String ambito { get; set; }
 
         private String nombre { get; set; }
-
-        public Estado() 
-        { this.idEstado = -1; }
-        public Estado(int idEstado, String ambito, String nombre) 
+        public Estado(string ambito, string nombre) 
         {
-            this.idEstado = idEstado;
             this.ambito = ambito;
             this.nombre = nombre;
         }

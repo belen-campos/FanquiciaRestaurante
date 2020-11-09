@@ -12,7 +12,8 @@ namespace CUFinalizarPreparacionPedido.soporte
 {
     public class PersistenciaBDEstado : IGestorPersistencia
     {
-
+        protected static List<int> idEstadosMaterializados = new List<int>();
+        protected static List<Estado> estadosMaterializados = new List<Estado>();
 
         SqlConnection cn = new SqlConnection("Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;");
         public void DesMaterializar(object obj)
@@ -22,28 +23,6 @@ namespace CUFinalizarPreparacionPedido.soporte
 
         public object MaterializarPorId(object id)
         {
-            Estado es;
-
-            String query = "SELECT * FROM dbo.Estado WHERE IdEstado =" + id;
-            SqlCommand sqlCommand = new SqlCommand(query, cn);
-
-            using (cn)
-            {
-                cn.Open();
-
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-
-                while (sqlDataReader.Read()) {
-                    IDataRecord row = (IDataRecord)sqlDataReader;
-                    int idEs = (int)row[0];
-                    String nombre = (String)row[1];
-                    String ambito = (String)row[2];
-                    es = new Estado(idEs, ambito, nombre);
-
-                    return es;
-                }
-            }
-
             return null;
         }
 
@@ -65,9 +44,27 @@ namespace CUFinalizarPreparacionPedido.soporte
                 {
                     IDataRecord row = (IDataRecord)sqlDataReader;
                     int idEs = (int)row[0];
-                    String ambito = (String)row[1];
-                    String nombre = (String)row[2];
-                    es.Add(new Estado(idEs, ambito, nombre));
+
+                    Estado nuevo;
+
+                    if (idEstadosMaterializados.Contains(idEs))
+                    {
+                        //si ya se creo busco su indice en la lista de id y lo busco en la lista de prodcutos carta
+                        int indice = idEstadosMaterializados.IndexOf(idEs);
+                        nuevo = estadosMaterializados[indice];
+                    }
+                    else
+                    {
+                        string ambito = (String)row[1];
+                        string nombre = (String)row[2];
+
+                        nuevo = new Estado(ambito, nombre);
+                        // aregreo a las listas de id y estados
+                        idEstadosMaterializados.Add(idEs);
+                        estadosMaterializados.Add(nuevo);
+                    }
+
+                    es.Add(nuevo);
                     i++;
                 }
             }
@@ -76,6 +73,18 @@ namespace CUFinalizarPreparacionPedido.soporte
         }
 
         public List<DetalleDePedido> buscarTodosDetallesPedido(List<Estado> estados) { return null; }
+
+        public Estado getEstado(int id) 
+        {
+            if (idEstadosMaterializados.Contains(id))
+            {
+                //si ya se creo busco su indice en la lista de id y lo busco en la lista de prodcutos carta
+                int indice = idEstadosMaterializados.IndexOf(id);
+                return estadosMaterializados[indice];
+            }
+
+            return null;
+        }
 
     }
 }

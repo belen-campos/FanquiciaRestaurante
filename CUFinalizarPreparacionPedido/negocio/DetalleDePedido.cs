@@ -8,14 +8,15 @@ namespace CUFinalizarPreparacionPedido.negocio
 {
     public class DetalleDePedido: IPersistencia, IComparable<DetalleDePedido>
     {
-        private static int nroPedido;
-        private static int nroDetalle;
+        private static PersistenciaBDDetallesDePedido Persistencia = new PersistenciaBDDetallesDePedido();
+        private int nroPedido;
+        private int nroDetalle;
         private int cantidad;
         private List<HistorialEstado> historialEstado;
         private TimeSpan hora;
         private Menu menu;
         private decimal precio;
-        private Producto producto;
+        private ProductoDeCarta producto;
         private TimeSpan tiempo;
 
 
@@ -26,13 +27,15 @@ namespace CUFinalizarPreparacionPedido.negocio
             this.precio = precio;
         }
 
-        public DetalleDePedido(int pedido, int detalle, int cantidad, TimeSpan hora, decimal precio)
+        public DetalleDePedido(int pedido, int detalle, int cantidad, TimeSpan hora, decimal precio, Menu menu, ProductoDeCarta producto)
         {
-            nroPedido = pedido;
-            nroDetalle = detalle;
+            this.nroPedido = pedido;
+            this.nroDetalle = detalle;
             this.cantidad = cantidad;
             this.hora = hora;
             this.precio = precio;
+            this.menu = menu;
+            this.producto = producto;
         }
 
         public bool estaEnPreparacion(Estado es)
@@ -57,16 +60,40 @@ namespace CUFinalizarPreparacionPedido.negocio
 
         public int getNroPedido()
         {
-            return nroPedido;
+            return this.nroPedido;
         }
 
         public int getNroDetalle()
         {
-            return nroDetalle;
+            return this.nroDetalle;
         }
 
         public TimeSpan getHora() { return this.hora; }
 
+        public int getCantidad() { return this.cantidad; }
+
+        public bool contieneMenu()
+        {
+            return this.menu != null;
+        }
+
+        public string mostrarNombreProducto() 
+        {
+            return this.producto.mostrarProducto();
+        }
+
+        public string mostrarNombreMenu() 
+        {
+            return this.menu.getNombre();
+        }
+
+        public int mostrarMesa() 
+        {
+            Pedido pedido = Persistencia.buscarPedido(this.nroPedido);
+            return pedido.mostrarMesa();
+        }
+
+        //para poder ordenarlos por hora
         public int CompareTo(DetalleDePedido dp)
         {
             if (dp.getHora() > hora)
