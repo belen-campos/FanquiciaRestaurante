@@ -9,34 +9,19 @@ using System.Threading.Tasks;
 
 namespace CUFinalizarPreparacionPedido.soporte
 {
-    public class PersistenciaBDPedido : IGestorPersistencia
+    public class PersistenciaBDPedido
     {
         private static PersistenciaBDMesa persitenciaMesa = new PersistenciaBDMesa();
 
         List<Pedido> pedidosMaterializados = new List<Pedido>();
 
-        
-        public List<DetalleDePedido> buscarTodosDetallesPedido(List<Estado> estados)
-        {
-            return null;
-        }
-
-        public List<Estado> buscarTodosEstados()
-        {
-            return null;
-        }
-
-        public void DesMaterializar(object obj)
-        {
-            throw new NotImplementedException();
-        }
+        private string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public object MaterializarPorId(object id)
         {
+            SqlConnection cn = new SqlConnection(conString);
+
             Pedido pedido=null;
-
-            SqlConnection cn = new SqlConnection("Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;");
-
 
             string query = @"SELECT P.[cantComensales],
 	                                P.[fechaHoraPed],
@@ -94,9 +79,9 @@ namespace CUFinalizarPreparacionPedido.soporte
 
         public List<Mesa> buscarMesa(int idPedido)
         {
-            List<Mesa> mesas = new List<Mesa>();
+            SqlConnection cn = new SqlConnection(conString);
 
-            SqlConnection cn = new SqlConnection("Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;");
+            List<Mesa> mesas = new List<Mesa>();
 
             //primero debo buscar el numero de la mesa que voy a solicitar materializar
             string query = @"SELECT (CASE

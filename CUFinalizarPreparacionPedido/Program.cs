@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CUFinalizarPreparacionPedido.interfaz;
+using System;
 using System.Windows.Forms;
 
 namespace CUFinalizarPreparacionPedido
@@ -10,6 +11,9 @@ namespace CUFinalizarPreparacionPedido
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            InterfazDispositivoMovil interfazMovil1 = new InterfazDispositivoMovil();
+            InterfazDispositivoMovil interfazMovil2 = new InterfazDispositivoMovil();
 
             Application.Run(new interfaz.PantallaFinalizarPreparacionPedido());
         }

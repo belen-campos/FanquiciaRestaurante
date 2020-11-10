@@ -1,4 +1,4 @@
-﻿namespace interfaz
+﻿namespace CUFinalizarPreparacionPedido.interfaz
 {
     partial class PantallaFinalizarPreparacionPedido
     {
@@ -31,10 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dvgDetallesEnPreparacion = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -63,6 +59,10 @@
             this.btnFinalizarPedido = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgDetallesEnPreparacion)).BeginInit();
@@ -101,38 +101,26 @@
             // 
             // dvgDetallesEnPreparacion
             // 
+            this.dvgDetallesEnPreparacion.AllowUserToAddRows = false;
+            this.dvgDetallesEnPreparacion.AllowUserToDeleteRows = false;
+            this.dvgDetallesEnPreparacion.AllowUserToResizeColumns = false;
+            this.dvgDetallesEnPreparacion.AllowUserToResizeRows = false;
             this.dvgDetallesEnPreparacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvgDetallesEnPreparacion.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
+            this.Producto,
+            this.menu,
+            this.cantidad,
+            this.mesa});
             this.dvgDetallesEnPreparacion.Location = new System.Drawing.Point(19, 41);
             this.dvgDetallesEnPreparacion.Name = "dvgDetallesEnPreparacion";
+            this.dvgDetallesEnPreparacion.ReadOnly = true;
+            this.dvgDetallesEnPreparacion.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dvgDetallesEnPreparacion.ShowCellErrors = false;
+            this.dvgDetallesEnPreparacion.ShowCellToolTips = false;
+            this.dvgDetallesEnPreparacion.ShowEditingIcon = false;
             this.dvgDetallesEnPreparacion.Size = new System.Drawing.Size(687, 242);
             this.dvgDetallesEnPreparacion.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "Producto";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Menu";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Cantidad";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.HeaderText = "Mesa";
-            this.Column4.Name = "Column4";
+            this.dvgDetallesEnPreparacion.TabStop = false;
             // 
             // label3
             // 
@@ -369,6 +357,37 @@
             this.button3.Text = "Volver";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // Producto
+            // 
+            this.Producto.DataPropertyName = "producto";
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            this.Producto.Width = 244;
+            // 
+            // menu
+            // 
+            this.menu.DataPropertyName = "menu";
+            this.menu.HeaderText = "Menu";
+            this.menu.Name = "menu";
+            this.menu.ReadOnly = true;
+            this.menu.Width = 200;
+            // 
+            // cantidad
+            // 
+            this.cantidad.DataPropertyName = "cantidad";
+            this.cantidad.HeaderText = "Cantidad";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            this.cantidad.Width = 90;
+            // 
+            // mesa
+            // 
+            this.mesa.DataPropertyName = "mesa";
+            this.mesa.HeaderText = "Mesa";
+            this.mesa.Name = "mesa";
+            this.mesa.ReadOnly = true;
+            // 
             // PantallaFinalizarPreparacionPedido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,10 +433,6 @@
         private System.Windows.Forms.Button btnFinalizarPedido;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
@@ -437,6 +452,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn menu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mesa;
     }
 }
 

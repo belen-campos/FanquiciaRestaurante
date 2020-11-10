@@ -30,5 +30,10 @@ namespace CUFinalizarPreparacionPedido.negocio
         {
             return this.nombre == "En preparacion";
         }
+
+        internal bool esListoParaServir()
+        {
+            return this.nombre == "Listo para servir";
+        }
     }
 }

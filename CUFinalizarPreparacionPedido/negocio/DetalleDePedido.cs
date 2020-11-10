@@ -109,5 +109,32 @@ namespace CUFinalizarPreparacionPedido.negocio
                 return 1;
             }
         }
+
+        internal void finalizar(Estado listoParaServir, DateTime fechaHoraActual)
+        {
+            HistorialEstado ultimo = setearFinUltimoHistoria(fechaHoraActual);
+            HistorialEstado nuevo = crearHistoria(listoParaServir, fechaHoraActual);
+            Persistencia.cambiarEstado(this, ultimo, nuevo);
+        }
+
+        private HistorialEstado crearHistoria(Estado listoParaServir, DateTime fechaHoraActual)
+        {
+            HistorialEstado nuevo = new HistorialEstado(listoParaServir, fechaHoraActual, null);
+            historialEstado.Add(nuevo);
+            return nuevo;
+        }
+
+        private HistorialEstado setearFinUltimoHistoria(DateTime fechaHoraActual)
+        {
+            HistorialEstado ultimo = obtenerUltimoEstado();
+            ultimo.setFechaHoraFin(fechaHoraActual);
+            return ultimo;
+        }
+
+        internal void quitarHistorial(HistorialEstado nuevo)
+        {
+            int indice = historialEstado.IndexOf(nuevo);
+            historialEstado[indice] = null;
+        }
     }
 }

@@ -1,24 +1,29 @@
-﻿using CUFinalizarPreparacionPedido.soporte;
-using interfaz;
+﻿using CUFinalizarPreparacionPedido.interfaz;
+using CUFinalizarPreparacionPedido.soporte;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace CUFinalizarPreparacionPedido.negocio
 {
-    public class GestorFinalizarPreparacionPedido
+    public class GestorFinalizarPreparacionPedido: ISujetoFinalizacionPreparacion
     {
         private PantallaFinalizarPreparacionPedido pantalla;
         private List<DetalleDePedido> detallesEnPreparacion;
-        private DetalleDePedido[] detallesPedidosNotificados;
+        private string[] detallesPedidosNotificados;
         private List<DetalleDePedido> detallesPedidoSeleccionadosAServir;
-        private IGestorPersistencia persistencia;
+        private PersistenciaBDEstado persistenciaEstado;
+        private PersistenciaBDDetallesDePedido persistenciaDetalle;
+        private List<IObservadorFinalizacionPreparacion> observadores;
 
         public GestorFinalizarPreparacionPedido(PantallaFinalizarPreparacionPedido pantalla)
         {
             this.pantalla = pantalla;
             detallesEnPreparacion = new List<DetalleDePedido>();
             detallesPedidoSeleccionadosAServir = new List<DetalleDePedido>();
+            observadores = new List<IObservadorFinalizacionPreparacion>();
+            detallesPedidosNotificados = new string[1];
         }
 
         public void finalizarPedido()
@@ -31,9 +36,9 @@ namespace CUFinalizarPreparacionPedido.negocio
         #region finalizarPedido
         private string[] buscarDetallesPedidoEnPreparacion()
         {
-            persistencia = new PersistenciaBDEstado();
+            persistenciaEstado = new PersistenciaBDEstado();
 
-            List<Estado> estadosTodos = persistencia.buscarTodosEstados();
+            List<Estado> estadosTodos = persistenciaEstado.buscarTodosEstados();
             Estado estadoEnPreparacion = null;
 
             foreach(Estado estado in estadosTodos)
@@ -47,8 +52,8 @@ namespace CUFinalizarPreparacionPedido.negocio
                 }
             }
 
-            persistencia = new PersistenciaBDDetallesDePedido();
-            List<DetalleDePedido> detallesTodos = persistencia.buscarTodosDetallesPedido(estadosTodos);
+            persistenciaDetalle = new PersistenciaBDDetallesDePedido();
+            List<DetalleDePedido> detallesTodos = persistenciaDetalle.buscarTodosDetallesPedido();
 
             foreach(DetalleDePedido dp in detallesTodos)
             {
@@ -102,10 +107,84 @@ namespace CUFinalizarPreparacionPedido.negocio
         }
         #endregion
 
-        public void detallePedidoSeleccionado(int indice) 
+        public void detallePedidoSeleccionado(int indice, string mesa) 
         {
             DetalleDePedido detalle = detallesEnPreparacion[indice];
             detallesPedidoSeleccionadosAServir.Add(detalle);
+
+            //cadena a notificar
+            string notificar = mesa + '|' + detalle.getCantidad();
+            //me aseguro que el arreglo para notificar no este lleno
+            int indiceNot = detallesPedidosNotificados.Where(s => s != null).Count();
+            if (detallesPedidosNotificados.Where(s =>s!=null).Count() == detallesPedidosNotificados.Length) 
+            {
+                //duplico el tamano del arreglo
+                int tamanoNuevo = detallesPedidosNotificados.Length * 2;
+                string[] aux = new string[tamanoNuevo];
+
+                //copio los elementos que estaban antes
+                int i = 0;
+                foreach (string item in detallesPedidosNotificados)
+                {
+                    aux[i] = item;
+                    i++;
+                }
+
+                //asigno aux al arreglo del gestor
+                detallesPedidosNotificados = aux;
+            }
+
+            detallesPedidosNotificados[indiceNot] = notificar;
+        }
+
+        public void confirmacionElaboracion() 
+        {
+            actualizarEstadoDetallePedido();
+        }
+
+        private void actualizarEstadoDetallePedido()
+        {
+            List<Estado> estados = PersistenciaBDEstado.getTodosEstados();
+            Estado listoParaServir = null;
+            foreach(Estado estado in estados) 
+            {
+                if (estado.esAmbitoDetallePedido()) 
+                {
+                    if (estado.esListoParaServir())
+                    {
+                        listoParaServir = estado;
+                        break;
+                    }
+                }
+            }
+
+            foreach (DetalleDePedido detalle in detallesPedidoSeleccionadosAServir) 
+            {
+                detalle.finalizar(listoParaServir, DateTime.Now);
+                suscribir(InterfazDispositivoMovil.CargarInterfaz());
+            }
+        }
+
+        public void publicarDetPedidoAServir()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void suscribir(List<IObservadorFinalizacionPreparacion> obs)
+        {
+            foreach (IObservadorFinalizacionPreparacion o in obs) 
+            {
+                observadores.Add(o);   
+            }
+        }
+
+        public void quitar(List<IObservadorFinalizacionPreparacion> obs)
+        {
+            foreach (IObservadorFinalizacionPreparacion o in obs)
+            {
+                int indice = observadores.IndexOf(o);
+                observadores[indice]=null;
+            }
         }
     }
 }

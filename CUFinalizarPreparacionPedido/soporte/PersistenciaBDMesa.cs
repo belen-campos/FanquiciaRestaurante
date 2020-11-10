@@ -9,30 +9,17 @@ using System.Threading.Tasks;
 
 namespace CUFinalizarPreparacionPedido.soporte
 {
-    public class PersistenciaBDMesa : IGestorPersistencia
+    public class PersistenciaBDMesa
     {
-        List<Mesa> mesasMaterializados = new List<Mesa>();
+        private List<Mesa> mesasMaterializados = new List<Mesa>();
 
-        public List<DetalleDePedido> buscarTodosDetallesPedido(List<Estado> estados)
-        {
-            return null;
-        }
-
-        public List<Estado> buscarTodosEstados()
-        {
-            return null;
-        }
-
-        public void DesMaterializar(object obj)
-        {
-            throw new NotImplementedException();
-        }
+        private static string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public object MaterializarPorId(object id)
         {
-            Mesa mesa = null;
+            SqlConnection cn = new SqlConnection(conString);
 
-            SqlConnection cn = new SqlConnection("Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;");
+            Mesa mesa = null;
 
             string query = @"SELECT Mesa.[numero],
 	                                Mesa.[capacidadComensales],

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace interfaz
+namespace CUFinalizarPreparacionPedido.interfaz
 {
     public partial class PantallaFinalizarPreparacionPedido : Form
     {
@@ -19,6 +19,11 @@ namespace interfaz
         {
             InitializeComponent();
             gestorFP = new GestorFinalizarPreparacionPedido(this);
+            dvgDetallesEnPreparacion.AutoGenerateColumns = false;
+            foreach (DataGridViewColumn column in dvgDetallesEnPreparacion.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         //abrir ventana
@@ -29,8 +34,12 @@ namespace interfaz
 
         public void mostrarDatosDetallePedidoEnPreparacion(string[] detallesAMostrar) 
         {
-            //llenar la grilla con estas cadenas, donde las columnas estan diferenciadas por ';'
-            //el ';' se puede cambiar por otro caracter si hiciera falta
+            for(int i=0; i<detallesAMostrar.Length; i++) 
+            {
+                string[] aux = detallesAMostrar[i].Split('|');
+                dvgDetallesEnPreparacion.Rows.Insert(i, aux[0], aux[1], aux[2], aux[3]);
+            }
+            dvgDetallesEnPreparacion.ClearSelection();
         }
 
         public void solicitarSeleccionDeUnoVariosDetalles() 
@@ -40,9 +49,20 @@ namespace interfaz
 
         private void btnFinalizarPedido_Click(object sender, EventArgs e)
         {
-            //buscar la forma de pasarle al gestor cada uno de los indices/posiciones de los detalles seleccionados
-            //se deben pasar de a uno al gestor: gestorFP.detallePedidoSeleccionado(indice)
+            //buscar la forma de pasarle al gestor cada uno de los indices/posiciones de los detalles seleccionados y la mesa porque esta cadena no se guarda
+            //se deben pasar de a uno al gestor: gestorFP.detallePedidoSeleccionado(indice, mesa)
             //Y por ulimo que aparezca el cartel de confirmacion
+
+            foreach (DataGridViewRow row in dvgDetallesEnPreparacion.SelectedRows)
+            {
+                int indice = row.Index;
+                string mesa = (string)row.Cells["mesa"].Value;
+
+                gestorFP.detallePedidoSeleccionado(indice, mesa);
+            }
+
+            gestorFP.confirmacionElaboracion();
+
         }
     }
 }
