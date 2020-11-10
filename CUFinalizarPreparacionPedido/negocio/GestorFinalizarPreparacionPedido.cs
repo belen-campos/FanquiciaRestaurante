@@ -52,7 +52,12 @@ namespace CUFinalizarPreparacionPedido.negocio
 
             foreach(DetalleDePedido dp in detallesTodos)
             {
+
+                if (dp.getHistorialEstado().Count()>0) {
+                    
                 if (dp.estaEnPreparacion(estadoEnPreparacion)) this.detallesEnPreparacion.Add(dp);
+
+                }
             }
 
             ordenarSegunMayorTiempoEspera();

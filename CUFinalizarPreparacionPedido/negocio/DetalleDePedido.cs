@@ -57,6 +57,10 @@ namespace CUFinalizarPreparacionPedido.negocio
         {
             this.historialEstado = historiales;
         }
+        internal List<HistorialEstado> getHistorialEstado()
+        {
+            return this.historialEstado;
+        }
 
         public int getNroPedido()
         {
