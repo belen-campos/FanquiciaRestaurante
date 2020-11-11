@@ -112,6 +112,12 @@
     <EmbeddedResource Include="interfaz\FormError.resx">
       <DependentUpon>FormError.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="interfaz\InterfazDispositivoMovil.resx">
+      <DependentUpon>InterfazDispositivoMovil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="interfaz\InterfazMonitor.resx">
+      <DependentUpon>InterfazMonitor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="interfaz\PantallaFinalizarPreparacionPedido.resx">
       <DependentUpon>PantallaFinalizarPreparacionPedido.cs</DependentUpon>
     </EmbeddedResource>

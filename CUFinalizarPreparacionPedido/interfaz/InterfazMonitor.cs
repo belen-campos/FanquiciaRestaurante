@@ -13,14 +13,21 @@ namespace CUFinalizarPreparacionPedido.interfaz
 {
     public partial class InterfazMonitor : Form, IObservadorFinalizacionPreparacion
     {
+        private static List<IObservadorFinalizacionPreparacion> interfacesMonitores = new List<IObservadorFinalizacionPreparacion>();
         public InterfazMonitor()
         {
             InitializeComponent();
+            interfacesMonitores.Add(this);
         }
 
-        public void actualizar(int numMesa, int cntProd)
+        public void visualizar(string numMesa, int cntProd)
         {
-            throw new NotImplementedException();
+           
+        }
+
+        public static List<IObservadorFinalizacionPreparacion> CargarInterfaz()
+        {
+            return interfacesMonitores;
         }
     }
 }

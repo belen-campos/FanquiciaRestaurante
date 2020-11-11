@@ -41,6 +41,7 @@ namespace CUFinalizarPreparacionPedido.negocio
         public bool estaEnPreparacion(Estado es)
         {
             HistorialEstado ultimoHistorialEstado = obtenerUltimoEstado();
+            if (ultimoHistorialEstado == null) return false;
             return ultimoHistorialEstado.getEstado() == es;
         }
 
@@ -110,16 +111,16 @@ namespace CUFinalizarPreparacionPedido.negocio
             }
         }
 
-        internal void finalizar(Estado listoParaServir, DateTime fechaHoraActual)
+        public void finalizar(Estado listoParaServir, DateTime fechaHoraActual)
         {
             HistorialEstado ultimo = setearFinUltimoHistoria(fechaHoraActual);
             HistorialEstado nuevo = crearHistoria(listoParaServir, fechaHoraActual);
             Persistencia.cambiarEstado(this, ultimo, nuevo);
         }
 
-        private HistorialEstado crearHistoria(Estado listoParaServir, DateTime fechaHoraActual)
+        private HistorialEstado crearHistoria(Estado estado, DateTime fechaHoraActual)
         {
-            HistorialEstado nuevo = new HistorialEstado(listoParaServir, fechaHoraActual, null);
+            HistorialEstado nuevo = new HistorialEstado(estado, fechaHoraActual, null);
             historialEstado.Add(nuevo);
             return nuevo;
         }
@@ -135,6 +136,13 @@ namespace CUFinalizarPreparacionPedido.negocio
         {
             int indice = historialEstado.IndexOf(nuevo);
             historialEstado[indice] = null;
+        }
+
+        public void notificar(Estado notificar, DateTime fechaHoraActual)
+        {
+            HistorialEstado ultimo = setearFinUltimoHistoria(fechaHoraActual);
+            HistorialEstado nuevo = crearHistoria(notificar, fechaHoraActual);
+            Persistencia.cambiarEstado(this, ultimo, nuevo);
         }
     }
 }

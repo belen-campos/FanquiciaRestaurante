@@ -8,6 +8,6 @@ namespace CUFinalizarPreparacionPedido.negocio
 {
     public interface IObservadorFinalizacionPreparacion
     {
-        public void actualizar(int numMesa, int cntProd);
+        public void visualizar(string numMesas, int cntProd);
     }
 }

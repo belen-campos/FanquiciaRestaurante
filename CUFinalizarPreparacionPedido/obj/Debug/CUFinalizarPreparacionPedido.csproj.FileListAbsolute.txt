@@ -24,3 +24,5 @@ C:\Users\HP\Documents\Nueva carpeta\FanquiciaRestaurante\CUFinalizarPreparacionP
 C:\Users\HP\Documents\Nueva carpeta\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.exe
 C:\Users\HP\Documents\Nueva carpeta\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.pdb
 C:\Users\HP\Documents\Nueva carpeta\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.interfaz.PantallaFinalizarPreparacionPedido.resources
+C:\Users\HP\Documents\Nueva carpeta\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.interfaz.InterfazDispositivoMovil.resources
+C:\Users\HP\Documents\Nueva carpeta\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.interfaz.InterfazMonitor.resources

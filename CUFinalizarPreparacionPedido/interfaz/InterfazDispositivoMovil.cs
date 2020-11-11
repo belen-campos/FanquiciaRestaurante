@@ -21,9 +21,9 @@ namespace CUFinalizarPreparacionPedido.interfaz
             interfacesMoviles.Add(this);
         }
 
-        public void actualizar(int numMesa, int cntProd)
+        public void visualizar(string numMesa, int cntProd)
         {
-            throw new NotImplementedException();
+            //
         }
 
         public static List<IObservadorFinalizacionPreparacion> CargarInterfaz() 

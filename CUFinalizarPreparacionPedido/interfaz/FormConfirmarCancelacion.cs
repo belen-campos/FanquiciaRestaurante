@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CUFinalizarPreparacionPedido.interfaz;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,21 @@ namespace Dsi.Interfaz
 {
     public partial class FormConfirmarCancelacion : Form
     {
-        public FormConfirmarCancelacion()
+        PantallaFinalizarPreparacionPedido pantalla;
+        public FormConfirmarCancelacion(PantallaFinalizarPreparacionPedido pantalla)
         {
             InitializeComponent();
+            this.pantalla = pantalla;
+        }
+
+        private void btnSi_Click(object sender, EventArgs e)
+        {
+            pantalla.Close();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

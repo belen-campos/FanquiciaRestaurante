@@ -10,7 +10,7 @@ namespace CUFinalizarPreparacionPedido.negocio
     {
         //en este caso no se permite crear atributos en la interface
 
-        public void publicarDetPedidoAServir();
+        public void publicarDetPedidoAServir(string mesa, int cantidad);
         public void suscribir(List<IObservadorFinalizacionPreparacion> obs);
         public void quitar(List<IObservadorFinalizacionPreparacion> obs);
     }

@@ -1,9 +1,11 @@
 ﻿using CUFinalizarPreparacionPedido.interfaz;
 using CUFinalizarPreparacionPedido.soporte;
+using Dsi.Interfaz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace CUFinalizarPreparacionPedido.negocio
 {
@@ -158,16 +160,56 @@ namespace CUFinalizarPreparacionPedido.negocio
                 }
             }
 
-            foreach (DetalleDePedido detalle in detallesPedidoSeleccionadosAServir) 
+            List<IObservadorFinalizacionPreparacion> obs = InterfazDispositivoMovil.CargarInterfaz();
+
+            obs = obs.Concat(InterfazMonitor.CargarInterfaz()).ToList();
+
+            for (int i = 0; i< detallesPedidoSeleccionadosAServir.Count(); i++) 
             {
+                DetalleDePedido detalle = detallesPedidoSeleccionadosAServir[i];
                 detalle.finalizar(listoParaServir, DateTime.Now);
-                suscribir(InterfazDispositivoMovil.CargarInterfaz());
+                suscribir(obs);
+                string[] aux = detallesPedidosNotificados[i].Split('|');
+                string mesa = aux[0];
+                var cantidad = aux[1];
+                publicarDetPedidoAServir(mesa, Convert.ToInt32(cantidad));
+                actualizarEstadoDetallePedido(detalle);
             }
+
+            finCU();
         }
 
-        public void publicarDetPedidoAServir()
+        private void finCU()
         {
-            throw new NotImplementedException();
+            FormConfirmacion fin = new FormConfirmacion(pantalla);
+            fin.ShowDialog();
+        }
+
+        private void actualizarEstadoDetallePedido(DetalleDePedido detalle)
+        {
+            List<Estado> estados = PersistenciaBDEstado.getTodosEstados();
+            Estado notificado = null;
+            foreach (Estado estado in estados)
+            {
+                if (estado.esAmbitoDetallePedido())
+                {
+                    if (estado.esNotificado())
+                    {
+                        notificado = estado;
+                        break;
+                    }
+                }
+            }
+
+            detalle.notificar(notificado, DateTime.Now);
+        }
+
+        public void publicarDetPedidoAServir(string mesa, int cantidad)
+        {
+            foreach(IObservadorFinalizacionPreparacion o in observadores) 
+            {
+                o.visualizar(mesa, cantidad);
+            }
         }
 
         public void suscribir(List<IObservadorFinalizacionPreparacion> obs)
