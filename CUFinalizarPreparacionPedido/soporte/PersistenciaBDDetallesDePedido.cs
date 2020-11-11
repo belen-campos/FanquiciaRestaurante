@@ -8,18 +8,17 @@ using System.Text;
 
 namespace CUFinalizarPreparacionPedido.soporte
 {
-    public class PersistenciaBDDetallesDePedido: IGestorPersistencia
+    public class PersistenciaBDDetallesDePedido
     {
         private static PersistenciaBDPedido persitenciaPedido = new PersistenciaBDPedido();
+        private static PersistenciaBDHistorialEstado persitenciaHistorialEstado = new PersistenciaBDHistorialEstado();
 
-        SqlConnection cn = new SqlConnection("Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;");
-        public void DesMaterializar(object obj)
-        {
-
-        }
+        private static string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public object MaterializarPorId(object id)
         {
+            SqlConnection cn = new SqlConnection(conString);
+
             DetalleDePedido dp;
 
             string query = @"SELECT [nroDetallePedido],
@@ -55,8 +54,10 @@ namespace CUFinalizarPreparacionPedido.soporte
             return null;
         }
 
-        public List<DetalleDePedido> buscarTodosDetallesPedido(List<Estado> estados)
+        public List<DetalleDePedido> buscarTodosDetallesPedido()
         {
+            SqlConnection cn = new SqlConnection(conString);
+
             List<DetalleDePedido> dp = new List<DetalleDePedido>();
             string query = @"SELECT DP.[nroPedido],
 	                                DP.[nroDetallePedido],
@@ -184,52 +185,73 @@ namespace CUFinalizarPreparacionPedido.soporte
 
                 foreach(DetalleDePedido detalle in dp)
                 {
-                    //Busco sus historiales
-                    List<HistorialEstado> historiales = new List<HistorialEstado>();
-                    string queryHistorialEstados = @"SELECT HE.fechaHoraInicio,
-	                                                        HE.fechaHoraFin,
-	                                                        ES.ambito,
-	                                                        ES.nombre
-                                                    FROM [FranquiciaRestaurante].[dbo].[HistorialEstado] HE
-                                                    JOIN [FranquiciaRestaurante].[dbo].[Estado] ES 
-                                                                ON HE.idEstado = ES.idEstado
-                                                    JOIN [FranquiciaRestaurante].[dbo].[DetalleDePedidoHistorialEstado] DP 
-                                                                ON DP.idHistorialEstado = HE.idHistorialEstado
-                                                    WHERE DP.nroPedido = " + detalle.getNroPedido() + "AND DP.nroDetallePedido = " + detalle.getNroDetalle();
 
-                    SqlCommand sqlCommandHistorialEstados = new SqlCommand(queryHistorialEstados, cn);
+                    List<HistorialEstado> historial = persitenciaHistorialEstado.getHisrotialDetallePedido(detalle.getNroPedido(), detalle.getNroDetalle(), cn);
 
-                    SqlDataReader sqlDataReaderHistorial = sqlCommandHistorialEstados.ExecuteReader();
-                    while (sqlDataReaderHistorial.Read())
-                    {
-                        IDataRecord rowHE = (IDataRecord)sqlDataReaderHistorial;
-                        Estado es = null;
-                        //Busco el puntero del estado vinculado al historial para crearlo
-                        foreach (Estado e in estados)
-                        {
-                            if (e.getAmbito() == (String)rowHE[2] && e.getNombre() == (String)rowHE[3])
-                            {
-                                es = e;
-                                break;
-                            }
-                        }
-                        DateTime fechaHoraInicio = (DateTime)rowHE[0];
-                        DateTime? fechaHoraFin = (DateTime?)(rowHE.IsDBNull(1) ? null : (DateTime?)rowHE[1]);
-                        
-                        historiales.Add(new HistorialEstado(es, fechaHoraInicio, fechaHoraFin));
+                    detalle.setHistorialEstado(historial);
 
-                    }
-
-                    detalle.setHistorialEstado(historiales);
-
-                    sqlDataReaderHistorial.Close();
+                    
                 }
             }
 
             return dp;
         }
 
-        public List<Estado> buscarTodosEstados() { return null; }
+        public void cambiarEstado(DetalleDePedido detalleDePedido, HistorialEstado ultimo, HistorialEstado nuevo)
+        {
+            SqlConnection cn = new SqlConnection(conString);
+
+            using (cn) 
+            {
+                cn.Open();
+                using (var tran = cn.BeginTransaction()) 
+                {
+                    try 
+                    {
+                        setearUltimaHistoria(detalleDePedido, ultimo, tran);
+
+                        persitenciaHistorialEstado.crearHistorial(detalleDePedido, nuevo, tran);
+
+                        tran.Commit();
+                    }
+                    catch (Exception ex) 
+                    {
+                        tran.Rollback();
+                        //elimino la fechahora del historial que vino como ultimo
+                        ultimo.setFechaHoraFin(null);
+                        //se saca del historial el que se habia agregado
+                        detalleDePedido.quitarHistorial(nuevo);
+                    }
+                }
+            }
+        }
+
+        public void setearUltimaHistoria(DetalleDePedido detalle, HistorialEstado ultimo, SqlTransaction tran)
+        {
+            //busco el id del historial para poder pasarlo a la persistencia del historial
+            int idHistorial = -1;
+
+            string query = @"SELECT HE.idHistorialEstado
+                            FROM [FranquiciaRestaurante].[dbo].[DetalleDePedidoHistorialEstado] DP
+                            JOIN [FranquiciaRestaurante].[dbo].[HistorialEstado] HE ON DP.idHistorialEstado = HE.idHistorialEstado
+                            WHERE DP.nroPedido = "+detalle.getNroPedido()+
+                                "AND DP.nroDetallePedido = "+detalle.getNroDetalle()+
+                                "AND HE.fechaHoraFin IS NULL";
+
+            SqlCommand sqlCommandIdHistorial = new SqlCommand(query, tran.Connection);
+            sqlCommandIdHistorial.Transaction = tran;
+            
+            SqlDataReader sqlDataReader = sqlCommandIdHistorial.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+                IDataRecord row = (IDataRecord)sqlDataReader;
+                idHistorial = (int)row[0];
+            }
+
+            sqlDataReader.Close();
+
+            persitenciaHistorialEstado.setearHistorialEstado(idHistorial, ultimo, tran);
+        }
 
         public Pedido buscarPedido(int idPedido)
         {

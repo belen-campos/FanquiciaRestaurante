@@ -66,6 +66,18 @@
     <Compile Include="interfaz\FormError.Designer.cs">
       <DependentUpon>FormError.cs</DependentUpon>
     </Compile>
+    <Compile Include="interfaz\InterfazDispositivoMovil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interfaz\InterfazDispositivoMovil.Designer.cs">
+      <DependentUpon>InterfazDispositivoMovil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="interfaz\InterfazMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interfaz\InterfazMonitor.Designer.cs">
+      <DependentUpon>InterfazMonitor.cs</DependentUpon>
+    </Compile>
     <Compile Include="interfaz\PantallaFinalizarPreparacionPedido.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +88,8 @@
     <Compile Include="negocio\Estado.cs" />
     <Compile Include="negocio\GestorFinalizarPreparacionPedido.cs" />
     <Compile Include="negocio\HistorialEstado.cs" />
+    <Compile Include="negocio\IObservadorFinalizacionPreparacion.cs" />
+    <Compile Include="negocio\ISujetoFinalizacionPreparacion.cs" />
     <Compile Include="negocio\Mesa.cs" />
     <Compile Include="negocio\Pedido.cs" />
     <Compile Include="negocio\Producto.cs" />
@@ -83,10 +97,10 @@
     <Compile Include="negocio\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="soporte\IGestorPersistencia.cs" />
     <Compile Include="soporte\IPersistencia.cs" />
     <Compile Include="soporte\PersistenciaBDDetallesDePedido.cs" />
     <Compile Include="soporte\PersistenciaBDEstado.cs" />
+    <Compile Include="soporte\PersistenciaBDHistorialEstado.cs" />
     <Compile Include="soporte\PersistenciaBDMesa.cs" />
     <Compile Include="soporte\PersistenciaBDPedido.cs" />
     <EmbeddedResource Include="interfaz\FormConfirmacion.resx">
@@ -97,6 +111,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="interfaz\FormError.resx">
       <DependentUpon>FormError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="interfaz\InterfazDispositivoMovil.resx">
+      <DependentUpon>InterfazDispositivoMovil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="interfaz\InterfazMonitor.resx">
+      <DependentUpon>InterfazMonitor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="interfaz\PantallaFinalizarPreparacionPedido.resx">
       <DependentUpon>PantallaFinalizarPreparacionPedido.cs</DependentUpon>

@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConfirmarCancelacion));
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSi = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -44,25 +44,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Los cambios no se guardarán \r\n¿Está seguro de cancelar la acción?  ";
             // 
-            // button1
+            // btnSi
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(269, 99);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Si";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSi.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSi.Location = new System.Drawing.Point(269, 99);
+            this.btnSi.Name = "btnSi";
+            this.btnSi.Size = new System.Drawing.Size(75, 23);
+            this.btnSi.TabIndex = 1;
+            this.btnSi.Text = "Si";
+            this.btnSi.UseVisualStyleBackColor = true;
+            this.btnSi.Click += new System.EventHandler(this.btnSi_Click);
             // 
-            // button2
+            // btnVolver
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Location = new System.Drawing.Point(162, 99);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Volver";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVolver.Location = new System.Drawing.Point(162, 99);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 2;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // FormConfirmarCancelacion
             // 
@@ -70,15 +72,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.CancelButton = this.button2;
+            this.CancelButton = this.btnVolver;
             this.ClientSize = new System.Drawing.Size(384, 145);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.btnSi);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormConfirmarCancelacion";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Cancelar";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -88,7 +91,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSi;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

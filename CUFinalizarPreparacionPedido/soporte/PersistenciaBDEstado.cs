@@ -10,24 +10,17 @@ using System.Collections;
 
 namespace CUFinalizarPreparacionPedido.soporte
 {
-    public class PersistenciaBDEstado : IGestorPersistencia
+    public class PersistenciaBDEstado
     {
         protected static List<int> idEstadosMaterializados = new List<int>();
         protected static List<Estado> estadosMaterializados = new List<Estado>();
 
-        SqlConnection cn = new SqlConnection("Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;");
-        public void DesMaterializar(object obj)
-        {
-            
-        }
-
-        public object MaterializarPorId(object id)
-        {
-            return null;
-        }
+        private static string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public List<Estado> buscarTodosEstados()
         {
+            SqlConnection cn = new SqlConnection(conString);
+
             List<Estado> es = new List<Estado>();
             String query = "SELECT * FROM dbo.Estado";
 
@@ -72,7 +65,11 @@ namespace CUFinalizarPreparacionPedido.soporte
             return es;
         }
 
-        public List<DetalleDePedido> buscarTodosDetallesPedido(List<Estado> estados) { return null; }
+        public int getIdEstado(Estado estado)
+        {
+            int indice = estadosMaterializados.IndexOf(estado);
+            return idEstadosMaterializados[indice];
+        }
 
         public Estado getEstado(int id) 
         {
@@ -85,6 +82,8 @@ namespace CUFinalizarPreparacionPedido.soporte
 
             return null;
         }
+
+        public static List<Estado> getTodosEstados() { return estadosMaterializados; }
 
     }
 }

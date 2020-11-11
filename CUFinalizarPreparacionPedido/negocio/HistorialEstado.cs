@@ -21,7 +21,7 @@ namespace CUFinalizarPreparacionPedido.negocio
 
         public DateTime getFechaHoraInicio() { return (DateTime)this.fechaHoraInicio; }
         public DateTime getFechaHoraFin() { return (DateTime)this.fechaHoraFin; }
-        public void setFechaHoraFin(DateTime fechaHora) { fechaHoraFin = fechaHora; }
+        public void setFechaHoraFin(DateTime? fechaHora) { fechaHoraFin = fechaHora; }
         public bool esUltimaHistoria()
         {
             return fechaHoraFin == null;
