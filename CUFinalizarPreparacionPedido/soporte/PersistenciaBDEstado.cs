@@ -15,7 +15,7 @@ namespace CUFinalizarPreparacionPedido.soporte
         protected static List<int> idEstadosMaterializados = new List<int>();
         protected static List<Estado> estadosMaterializados = new List<Estado>();
 
-        private static string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
+        private static string conString = "Server=DESKTOP-BJK4AIA;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public List<Estado> buscarTodosEstados()
         {

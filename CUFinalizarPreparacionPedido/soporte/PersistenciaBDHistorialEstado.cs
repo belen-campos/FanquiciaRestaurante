@@ -16,7 +16,7 @@ namespace CUFinalizarPreparacionPedido.soporte
 
         private static PersistenciaBDEstado persitenciaEstado = new PersistenciaBDEstado();
 
-        private static string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
+        private static string conString = "Server=DESKTOP-BJK4AIA;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public List<HistorialEstado> getHisrotialDetallePedido(int numPedido, int numDetalle, SqlConnection con) 
         {

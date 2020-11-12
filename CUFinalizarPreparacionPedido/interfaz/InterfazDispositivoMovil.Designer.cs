@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfazDispositivoMovil));
             this.label1 = new System.Windows.Forms.Label();
             this.dgvMovil = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovil)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -69,6 +69,21 @@
             this.dgvMovil.ShowRowErrors = false;
             this.dgvMovil.Size = new System.Drawing.Size(199, 185);
             this.dgvMovil.TabIndex = 1;
+            this.dgvMovil.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovil_CellContentClick);
+            // 
+            // mesa
+            // 
+            this.mesa.FillWeight = 55.83756F;
+            this.mesa.HeaderText = "Mesa";
+            this.mesa.Name = "mesa";
+            this.mesa.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.FillWeight = 144.1624F;
+            this.cantidad.HeaderText = "Cantidad de Productos";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
             // 
             // button1
             // 
@@ -91,20 +106,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
-            // 
-            // mesa
-            // 
-            this.mesa.FillWeight = 55.83756F;
-            this.mesa.HeaderText = "Mesa";
-            this.mesa.Name = "mesa";
-            this.mesa.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.FillWeight = 144.1624F;
-            this.cantidad.HeaderText = "Cantidad de Productos";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
             // 
             // InterfazDispositivoMovil
             // 

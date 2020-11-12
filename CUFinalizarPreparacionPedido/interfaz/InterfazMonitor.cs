@@ -22,10 +22,11 @@ namespace CUFinalizarPreparacionPedido.interfaz
 
         public void visualizar(string numMesa, int cntProd)
         {
-           
-        }
+            var index = dgvMonitor.Rows.Add();
+            dgvMonitor.Rows[index].Cells["mesa"].Value = numMesa;
+            dgvMonitor.Rows[index].Cells["cantidad"].Value = cntProd;        }
 
-        public static List<IObservadorFinalizacionPreparacion> CargarInterfaz()
+            public static List<IObservadorFinalizacionPreparacion> CargarInterfaz()
         {
             return interfacesMonitores;
         }

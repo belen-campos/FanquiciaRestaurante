@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InterfazMonitor));
             this.label1 = new System.Windows.Forms.Label();
             this.dgvMonitor = new System.Windows.Forms.DataGridView();
+            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.mesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMonitor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -75,6 +75,21 @@
             this.dgvMonitor.Size = new System.Drawing.Size(707, 210);
             this.dgvMonitor.TabIndex = 2;
             // 
+            // mesa
+            // 
+            this.mesa.FillWeight = 101.5228F;
+            this.mesa.HeaderText = "MESA";
+            this.mesa.Name = "mesa";
+            this.mesa.ReadOnly = true;
+            this.mesa.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // cantidad
+            // 
+            this.cantidad.FillWeight = 98.47716F;
+            this.cantidad.HeaderText = "CANTIDAD DE PRODUCTOS LISTOS";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -105,21 +120,6 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
-            // 
-            // mesa
-            // 
-            this.mesa.FillWeight = 101.5228F;
-            this.mesa.HeaderText = "MESA";
-            this.mesa.Name = "mesa";
-            this.mesa.ReadOnly = true;
-            this.mesa.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // cantidad
-            // 
-            this.cantidad.FillWeight = 98.47716F;
-            this.cantidad.HeaderText = "CANTIDAD DE PRODUCTOS LISTOS";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
             // 
             // InterfazMonitor
             // 

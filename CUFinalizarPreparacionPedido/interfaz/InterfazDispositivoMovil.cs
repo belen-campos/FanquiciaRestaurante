@@ -14,6 +14,7 @@ namespace CUFinalizarPreparacionPedido.interfaz
 {
     public partial class InterfazDispositivoMovil : Form, IObservadorFinalizacionPreparacion
     {
+       
         private static List<IObservadorFinalizacionPreparacion> interfacesMoviles = new List<IObservadorFinalizacionPreparacion>();
         public InterfazDispositivoMovil()
         {
@@ -23,12 +24,19 @@ namespace CUFinalizarPreparacionPedido.interfaz
 
         public void visualizar(string numMesa, int cntProd)
         {
-            
+            var index = dgvMovil.Rows.Add();
+            dgvMovil.Rows[index].Cells["mesa"].Value = numMesa;
+            dgvMovil.Rows[index].Cells["cantidad"].Value = cntProd;
         }
 
         public static List<IObservadorFinalizacionPreparacion> CargarInterfaz() 
         {
             return interfacesMoviles;
+        }
+
+        private void dgvMovil_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
