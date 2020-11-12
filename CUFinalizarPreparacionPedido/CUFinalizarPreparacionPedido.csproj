@@ -84,6 +84,12 @@
     <Compile Include="interfaz\PantallaFinalizarPreparacionPedido.Designer.cs">
       <DependentUpon>PantallaFinalizarPreparacionPedido.cs</DependentUpon>
     </Compile>
+    <Compile Include="interfaz\Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="interfaz\Principal.Designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </Compile>
     <Compile Include="negocio\DetalleDePedido.cs" />
     <Compile Include="negocio\Estado.cs" />
     <Compile Include="negocio\GestorFinalizarPreparacionPedido.cs" />
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="interfaz\PantallaFinalizarPreparacionPedido.resx">
       <DependentUpon>PantallaFinalizarPreparacionPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="interfaz\Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

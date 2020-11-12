@@ -18,7 +18,7 @@ namespace CUFinalizarPreparacionPedido
             InterfazMonitor interfazMonitor1 = new InterfazMonitor();
             InterfazMonitor interfazMonitor2 = new InterfazMonitor();
 
-            Application.Run(new interfaz.PantallaFinalizarPreparacionPedido());
+            Application.Run(new interfaz.Principal());
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CUFinalizarPreparacionPedido.interfaz
 
         public void visualizar(string numMesa, int cntProd)
         {
-            //
+            
         }
 
         public static List<IObservadorFinalizacionPreparacion> CargarInterfaz() 
