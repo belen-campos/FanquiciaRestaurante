@@ -57,3 +57,4 @@ C:\Users\Suomi\Source\Repos\FanquiciaRestaurante\CUFinalizarPreparacionPedido\ob
 C:\Users\Suomi\Source\Repos\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.csproj.CoreCompileInputs.cache
 C:\Users\Suomi\Source\Repos\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.exe
 C:\Users\Suomi\Source\Repos\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.pdb
+C:\Users\HP\Documents\Nueva carpeta\FanquiciaRestaurante\CUFinalizarPreparacionPedido\obj\Debug\CUFinalizarPreparacionPedido.interfaz.Principal.resources

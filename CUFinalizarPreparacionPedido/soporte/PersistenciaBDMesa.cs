@@ -13,7 +13,7 @@ namespace CUFinalizarPreparacionPedido.soporte
     {
         private List<Mesa> mesasMaterializados = new List<Mesa>();
 
-        private static string conString = "Server=DESKTOP-BJK4AIA;DataBase=FranquiciaRestaurante; Integrated Security=true;";
+        private static string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public object MaterializarPorId(object id)
         {

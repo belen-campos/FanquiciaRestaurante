@@ -13,7 +13,7 @@ namespace CUFinalizarPreparacionPedido.soporte
         private static PersistenciaBDPedido persitenciaPedido = new PersistenciaBDPedido();
         private static PersistenciaBDHistorialEstado persitenciaHistorialEstado = new PersistenciaBDHistorialEstado();
 
-        private static string conString = "Server=DESKTOP-BJK4AIA;DataBase=FranquiciaRestaurante; Integrated Security=true;";
+        private static string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public object MaterializarPorId(object id)
         {

@@ -15,7 +15,7 @@ namespace CUFinalizarPreparacionPedido.soporte
 
         List<Pedido> pedidosMaterializados = new List<Pedido>();
 
-        private string conString = "Server=DESKTOP-BJK4AIA;DataBase=FranquiciaRestaurante; Integrated Security=true;";
+        private string conString = "Server=.\\SQLEXPRESS;DataBase=FranquiciaRestaurante; Integrated Security=true;";
 
         public object MaterializarPorId(object id)
         {

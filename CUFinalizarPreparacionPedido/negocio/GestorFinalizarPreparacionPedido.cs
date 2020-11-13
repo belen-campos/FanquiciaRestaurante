@@ -25,7 +25,7 @@ namespace CUFinalizarPreparacionPedido.negocio
             detallesEnPreparacion = new List<DetalleDePedido>();
             detallesPedidoSeleccionadosAServir = new List<DetalleDePedido>();
             observadores = new List<IObservadorFinalizacionPreparacion>();
-            detallesPedidosNotificados = new string[1];
+            detallesPedidosNotificados = new string[10];
         }
 
         public void finalizarPedido()
@@ -164,11 +164,12 @@ namespace CUFinalizarPreparacionPedido.negocio
 
             obs = obs.Concat(InterfazMonitor.CargarInterfaz()).ToList();
 
+            suscribir(obs);
+
             for (int i = 0; i< detallesPedidoSeleccionadosAServir.Count(); i++) 
             {
                 DetalleDePedido detalle = detallesPedidoSeleccionadosAServir[i];
                 detalle.finalizar(listoParaServir, DateTime.Now);
-                suscribir(obs);
                 string[] aux = detallesPedidosNotificados[i].Split('|');
                 string mesa = aux[0];
                 var cantidad = aux[1];

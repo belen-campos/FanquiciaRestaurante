@@ -69,7 +69,6 @@
             this.dgvMovil.ShowRowErrors = false;
             this.dgvMovil.Size = new System.Drawing.Size(199, 185);
             this.dgvMovil.TabIndex = 1;
-            this.dgvMovil.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovil_CellContentClick);
             // 
             // mesa
             // 
